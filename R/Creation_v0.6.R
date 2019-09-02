@@ -113,7 +113,8 @@ ExtractWindow = function(InMatrix, y, x, ySize = 3, xSize = 3){
 
   OutMatrix = matrix(0,ySize,xSize, byrow=TRUE)
 
-  Size = (Size - 1) / 2
+  xSize = (xSize - 1) / 2
+  ySize = (ySize - 1) / 2
   countX = 1
   for(xRange in (x-xSize):(x+xSize)){
     countY = 1
