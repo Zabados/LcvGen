@@ -235,6 +235,8 @@ AddAllSeedPoints <- function(AllyLocal, AllxLocal, World, GrowWorld, WeightWorld
   return(Recieved)
 }
 
+#' @import mobsim
+#' @import spatstat
 CreatSeeds <- function(PatchDistribution, SeedPoints,Extent){
   # library(mobsim)
   # library(spatstat)
@@ -289,6 +291,7 @@ CreatSeeds <- function(PatchDistribution, SeedPoints,Extent){
 #' @examples
 #'
 #' TBA...
+#' @import truncnorm
 #'
 #' @export
 CreateWorld <- function(SeedPoints, PercentageCover, Extent, SeedDistribution = NULL, PatchDistribution=NULL, SecondPercentageCover = 0.0, normalSD=0.01, paretoVal = 1){
@@ -442,6 +445,7 @@ AddMoreSeedPoints <- function(AllyLocal, AllxLocal, World, GrowWorld, WeightWorl
   return(Recieved)
 }
 
+#' @import truncnorm
 GrowAllBuffers <-function(World,GrowWorld, WeightWorld, CoverCells,RangeSeeds , SeedDistribution=NULL, normalSD=0.1){
   # library(truncnorm)
   Extent<- nrow(World)

@@ -36,5 +36,4 @@ creates a landscape with zeros in and then adds patches
 \examples{
 
 TBA...
-
 }
