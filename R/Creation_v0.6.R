@@ -237,6 +237,7 @@ AddAllSeedPoints <- function(AllyLocal, AllxLocal, World, GrowWorld, WeightWorld
 
 #' @import mobsim
 #' @import spatstat
+#' @export
 CreatSeeds <- function(PatchDistribution, SeedPoints,Extent){
   # library(mobsim)
   # library(spatstat)
