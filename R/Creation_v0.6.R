@@ -472,7 +472,13 @@ GrowAllBuffers <-function(World,GrowWorld, WeightWorld, CoverCells,RangeSeeds , 
     #This should pick patches that can be grown.
     Possiblities = c()
     while(length(Possiblities)==0){
-      targetPatch = sample(RangeSeeds, 1, prob = SeedDist)
+      if(length(RangeSeeds)==length(SeedDist)){
+        targetPatch = sample(RangeSeeds, 1, prob = SeedDist)
+      }else{
+        save.image()
+        targetPatch = sample(RangeSeeds, 1)
+      }
+
       Possiblities = which(GrowWorld==targetPatch , arr.ind=TRUE)
     }
     other = RangeSeeds[RangeSeeds !=targetPatch ]
