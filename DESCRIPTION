@@ -1,11 +1,18 @@
 Package: LcvGen
 Type: Package
-Title: What the Package Does (Title Case)
+Title: LcvGen : Generarting simulated land cover data.
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: person("Chetcuti", "Jordan", email = "jorche@ceh.ac.uk", role = c("aut", "cre"))
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Date: 2019-09-02
+License: CC BY
 Encoding: UTF-8
 LazyData: true
+RoxygenNote: 6.1.1
+Imports:
+	mobsim (>= 0.1.0),
+	spatstat (>= 1.60.1),
+	truncnorm (>= 1.0.8)
+Suggests: knitr,rmarkdown
+VignetteBuilder: knitr
