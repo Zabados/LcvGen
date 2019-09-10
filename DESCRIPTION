@@ -11,8 +11,8 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
 Imports:
-	mobsim (>= 0.1.0),
-	spatstat (>= 1.60.1),
-	truncnorm (>= 1.0.8)
+	mobsim,
+	spatstat,
+	truncnorm,
 Suggests: knitr,rmarkdown
 VignetteBuilder: knitr
