@@ -75,7 +75,7 @@ ArrayToAsc <- function(inArray, filename, overwrite=FALSE, runno = NULL){
   write.table(inArray, TempFielName, sep = " ", row.names = FALSE, col.names = FALSE)
   body = readLines(TempFielName)
   file.remove(TempFielName)
-  header = dget("header")
+
   header <- gsub("NROWS 1020", paste("NROWS", nrow(inArray), sep = " "))
   header <- gsub("NCOLS 1020", paste("NCOLS", ncol(inArray), sep = " "))
   OutPut = c(header,body)
