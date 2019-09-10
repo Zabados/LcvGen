@@ -76,8 +76,8 @@ ArrayToAsc <- function(inArray, filename, overwrite=FALSE, runno = NULL){
   body = readLines(TempFielName)
   file.remove(TempFielName)
 
-  header <- gsub("NROWS 1020", paste("NROWS", nrow(inArray), sep = " "))
-  header <- gsub("NCOLS 1020", paste("NCOLS", ncol(inArray), sep = " "))
+  header <- gsub("NROWS 1020", paste("NROWS", nrow(inArray), sep = " "), header)
+  header <- gsub("NCOLS 1020", paste("NCOLS", ncol(inArray), sep = " "), header)
   OutPut = c(header,body)
 
   if(overwrite == TRUE & file.exists(filename)){
