@@ -893,7 +893,29 @@ AddBuffer = function(landcovermatrix, patchesmatrix, buffer=5){
 }
 
 
-GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath, runno = NULL){
+
+
+#' GenerateLandcover creates a ascii land cover dataset with a corresponding patch number data set.
+#'
+#' This function uses other functions to create a land cover with the focal habitat haveing a number
+#' of patches.
+#'
+#' @param NumberSeeds integer -
+#' @param LCVPath character - string of the output path of the land cover ascii
+#' @param PatchPath character - string of the output path of the patch ascii
+#' @param runno integer - defaults to NULL
+#' @param EqualSize boolean -
+#' @param ChosenPatchDistribution character - how seed points are distributed to grow the patches. Options are "Random" or "Poisson", "Clustered" or "Thomas", or "Regular", "Strauss" or"Dispersed"
+#' and defaults to random.
+#' @param SeedDistribution character -a distribution from which to pick the size of patches from. Opetions are
+#' "Gaussian" or"Normal", "Pareto", or the default "Uniform". Uniform gives patches of almost any size and the maximum variation.
+#' @return list of arrays - the list contains two arrays, the "Patches" and "InterestLCV" (land cover).
+#' @examples
+#'
+#' TBA...
+#'
+#' @export
+GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath, runno = NULL, MatrixHabs =10){
   #require(raster)
   #require(rasterVis)
   "
@@ -921,7 +943,7 @@ GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath, runno = NULL){
   Patches = InterestPatches$LargerWorld
   LCV = ifelse(Patches>0,1,0)
 
-  PatchesDispersedMatrix <- FillTheMatix(Patches, LCV, PossibleNumberMatrixsPoints = 1:200, EqualSize = FALSE, ChosenPatchDistribution = "Random", SeedDistribution = "Uniform")
+  PatchesDispersedMatrix <- FillTheMatix(Patches, LCV, MatrixHabs = MatrixHabs, PossibleNumberMatrixsPoints = 1:200, EqualSize = FALSE, ChosenPatchDistribution = "Random", SeedDistribution = "Uniform")
 
   Patches = PatchesDispersedMatrix$Patches
   LCV = PatchesDispersedMatrix$InterestLCV
