@@ -475,7 +475,8 @@ GrowAllBuffers <-function(World,GrowWorld, WeightWorld, CoverCells,RangeSeeds , 
       if(length(RangeSeeds)==length(SeedDist)){
         targetPatch = sample(RangeSeeds, 1, prob = SeedDist)
       }else{
-        save.image()
+        save(RangeSeeds, paste("RS",format(Sys.time(), "%H:%M:%S"),".rdata", sep = ""))
+        save(SeedDist, paste("SD",format(Sys.time(), "%H:%M:%S"),".rdata", sep = ""))
         targetPatch = sample(RangeSeeds, 1)
       }
 
