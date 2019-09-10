@@ -477,7 +477,7 @@ GrowAllBuffers <-function(World,GrowWorld, WeightWorld, CoverCells,RangeSeeds , 
       }else{
         save(RangeSeeds, paste("RS",format(Sys.time(), "%H:%M:%S"),".rdata", sep = ""))
         save(SeedDist, paste("SD",format(Sys.time(), "%H:%M:%S"),".rdata", sep = ""))
-        targetPatch = sample(RangeSeeds, 1)
+        #targetPatch = sample(RangeSeeds, 1)
       }
 
       Possiblities = which(GrowWorld==targetPatch , arr.ind=TRUE)
