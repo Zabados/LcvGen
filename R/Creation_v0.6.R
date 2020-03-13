@@ -995,7 +995,7 @@ GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath, runno = NULL, Matr
   Patches = PatchesDispersedMatrix$Patches
   LCV = PatchesDispersedMatrix$InterestLCV
 
-  Scale <= FullExtent/GenExtent
+  Scale <- FullExtent/GenExtent
   if(!Scale==1){
     Patches = ScaleUpArray(Patches,Scale,Scale)
     LCV = ScaleUpArray(LCV,Scale,Scale)
