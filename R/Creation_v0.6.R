@@ -5,24 +5,29 @@
 #'
 #'
 #' @details
-#'     The main function i is \link[PhiCor]{CorIndex.all.plusP}.
-#'     This will calculate all phi corelation of association values and
-#'     purmutate to give p-values.
+#'     The main function i are \link[LcvGen]{GenerateLandcover} and pottentially
+#'     \link[LcvGen]{CreateWorld} and \link[LcvGen]{FillTheMatix}.
+#'     This will generate a land cover and patches ascii datasets.
 #'
-#'     The other Phi coefficent functions are useful in testing or calculating only part
-#'     of the full outputs from \link[PhiCor]{CorIndex.all.plusP}:
+#'     Many of the other LCVGen functions are used in \link[LcvGen]{GenerateLandcover}.
+#'     Some of them may be useful alone however:
 #'     \itemize{
-#'         \item \link[PhiCor]{CorIndex} calculates the inputs that don't change between habitats.
-#'         \item \link[PhiCor]{CorIndex.TargetVar} calculates the additional input specific to a habitat.
-#'         \item \link[PhiCor]{CorIndex.groupEqual} calculates the group-equalised phi for a habitat.
-#'         \item \link[PhiCor]{CorIndex.nonEqual} calculates the non group-equalised phi for a habitat.
-#'         \item \link[PhiCor]{CorIndex.xPerm} returns the null phi distribution for a habitat.
-#'         \item \link[PhiCor]{CorIndex.all} returns the non and group-equalised phi values for all habitats
-#'             without p-values and is therefore quicker.
+#'         \item \link[LcvGen]{CreateWorld} -
+#'         \item \link[LcvGen]{CreatSeeds} -
+#'         \item \link[LcvGen]{AddAllSeedPoints} -
+#'         \item \link[LcvGen]{ExtractWindow} -
+#'         \item \link[LcvGen]{GrowBuffer} -
+#'         \item \link[LcvGen]{CreateAdditionalWorld} -
+#'         \item \link[LcvGen]{AddMoreSeedPoints}
+#'         \item \link[LcvGen]{GrowAllBuffer}
+#'         \item \link[LcvGen]{FillAllZeroPatches}
+#'         \item \link[LcvGen]{ScaleUpArray}
+#'         \item \link[LcvGen]{AddBuffer}
+#'         \item \link[LcvGen]{ArrayToAsc}
 #'     }
 #'
 #'
-#'     The functions \link[PhiCor]{lookup} and \link[PhiCor]{FilePathInTree}
+#'     The functions ? and ?
 #'     might be used elsewhere.
 #' @author Jordan Chetcuti
 #' @references
@@ -100,7 +105,8 @@ ArrayToAsc <- function(inArray, filename, overwrite=FALSE, runno = NULL){
 #' @param x integer - central x location for subset.
 #' @param ySize integer - height of window
 #' @param xSize integer - width of window
-#' @return array - a array smaller than the input array of the 3 by 3 by default or larger if specified.
+#' @return array - an array smaller than the input array. Of the 3 by 3 by default or larger if
+#' specified.
 #' @examples
 #'
 #' TBA...
@@ -131,15 +137,17 @@ ExtractWindow = function(InMatrix, y, x, ySize = 3, xSize = 3){
 
 #' GrowBuffer adds a cell of habitat when growing habitat patches.
 #'
-#' I wrote this and I've lost track of exactly what it does...
+#' This takes two input arrays, one with the filled patches and the other with the buffered patches
+#' and converts one of the buffer cells into a cell of habitat and expands the buffer.I think
+#' it weights the buffer so that it often fills holes first.
 #'
 #' @param yLocal array - an input array from which a subset will be taken.
 #' @param xLocal integer - central y location for subset.
 #' @param seed integer - central x location for subset.
 #' @param Extent integer - height of window
 #' @param World integer - width of window
-#' @param GrowWorld array
-#' @param WeightWorld array
+#' @param GrowWorld array that defines where the patches of habitat are.
+#' @param WeightWorld array of a weighted buffer around the patches used to grow patches.
 #' @return list of arrays - the list contains two arrays, the updated GrowWorld and WeightWorld.
 #' @examples
 #'
@@ -277,7 +285,11 @@ CreatSeeds <- function(PatchDistribution, SeedPoints,Extent){
 
 #' CreateWorld sets up an initial matrix with the focal patches in
 #'
-#' creates a landscape with zeros in and then adds patches
+#' creates a landscape with zeros in and then adds the number of patches. The result is
+#' an array with a zero background and complete numbered patches.
+#'
+#' It can actually return two complete numbered set of patches. The patches are the same, one just grown further along to give a larger area.
+#' Lastly it returns the buffer, that looks like an atol.
 #'
 #' @param SeedPoints integer - number of patches
 #' @param PercentageCover float between 0.0 & 1.0 giving the proportion of array that should be patches.
@@ -289,7 +301,8 @@ CreatSeeds <- function(PatchDistribution, SeedPoints,Extent){
 #' @param SecondPercentageCover float between 0.0 & 1.0 giving the proportion of array that should be patches.If > 0 creates an additional array based on the seeds of the first with a different proportion.
 #' @param normalSD default = 0.01,
 #' @param paretoVal defulat = 1
-#' @return list of arrays - the list contains two arrays, the updated GrowWorld and WeightWorld.
+#' @return list of arrays - the list contains two or three arrays, the updated LargerWorld and an option SmallerWorld and GrowWorld.
+#' The first two are complete sets of patches, and can be of two different areas total.
 #' @examples
 #'
 #' TBA...
@@ -869,6 +882,32 @@ ScaleUpArray <- function(InArray, scaleY, scaleX){
   return(OutArray)
 }
 
+
+
+
+
+#' AddBuffer adds blank cells around
+#' habitat patches.
+#'
+#' This function adds habitats into the intervening space between a focal habitat patch.
+#' It differs from \link[LcvGen]{FillTheMatix} by allowing non sequential habitats. For example,
+#' habitat 2, 5, 7, 8, 9, 100.
+#'
+#' @param Patches array -
+#' @param InterestLCV array -
+#' @param MatrixHabs integer - default 10 habitats
+#' @param PossibleNumberMatrixsPoints list of integers -
+#' @param EqualSize boolean -
+#' @param ChosenPatchDistribution character - how seed points are distributed to grow the patches. Options are "Random" or "Poisson", "Clustered" or "Thomas", or "Regular", "Strauss" or"Dispersed"
+#' and defaults to random.
+#' @param SeedDistribution character -a distribution from which to pick the size of patches from. Opetions are
+#' "Gaussian" or"Normal", "Pareto", or the default "Uniform". Uniform gives patches of almost any size and the maximum variation.
+#' @return list of arrays - the list contains two arrays, the "Patches" and "InterestLCV" (land cover).
+#' @examples
+#'
+#' TBA...
+#'
+#' @export
 AddBuffer = function(landcovermatrix, patchesmatrix, buffer=5){
 
 
@@ -905,18 +944,25 @@ AddBuffer = function(landcovermatrix, patchesmatrix, buffer=5){
 #' @param LCVPath character - string of the output path of the land cover ascii
 #' @param PatchPath character - string of the output path of the patch ascii
 #' @param runno integer - defaults to NULL
-#' @param EqualSize boolean -
-#' @param ChosenPatchDistribution character - how seed points are distributed to grow the patches. Options are "Random" or "Poisson", "Clustered" or "Thomas", or "Regular", "Strauss" or"Dispersed"
-#' and defaults to random.
+#' @param MatrixHabs integer -number of habitats in the matrix
+#' @param GenExtent integer - default 250, this is the extent that the land cover is generated at.
 #' @param SeedDistribution character -a distribution from which to pick the size of patches from. Opetions are
 #' "Gaussian" or"Normal", "Pareto", or the default "Uniform". Uniform gives patches of almost any size and the maximum variation.
+#'
 #' @return list of arrays - the list contains two arrays, the "Patches" and "InterestLCV" (land cover).
 #' @examples
 #'
 #' TBA...
 #'
 #' @export
-GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath, runno = NULL, MatrixHabs =10){
+GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath, runno = NULL, MatrixHabs =10,
+                             GenExtent = 250, FullExtent = 1000, BufferFullExtent = 0,
+                             cover=0.1, DistributionPatches = "Random",
+                             DistributionSeeds = "Uniform",
+                             NumberEachMatrixHabs = 1:200,
+                             MatrixHabsEqualSize = FALSE,
+                             MatrixPatchDistribution = "Random",
+                             MarixSeedDistribution = "Uniform"){
   #require(raster)
   #require(rasterVis)
   "
@@ -936,25 +982,34 @@ GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath, runno = NULL, Matr
 
   "
 
-  TheExtent = 250
+
   #axisLabels = list(at=c(0, 250, 500, 750,1000))
 
-  InterestPatches = CreateWorld(SeedPoints = NumberSeeds, PercentageCover = 0.1, Extent = TheExtent, SecondPercentageCover = 0 , PatchDistribution = "Random", SeedDistribution = "Uniform")
+  InterestPatches = CreateWorld(SeedPoints = NumberSeeds, PercentageCover = cover, Extent = GenExtent, SecondPercentageCover = 0 , PatchDistribution = DistributionPatches, SeedDistribution = DistributionSeeds )
 
   Patches = InterestPatches$LargerWorld
   LCV = ifelse(Patches>0,1,0)
 
-  PatchesDispersedMatrix <- FillTheMatix(Patches, LCV, MatrixHabs = MatrixHabs, PossibleNumberMatrixsPoints = 1:200, EqualSize = FALSE, ChosenPatchDistribution = "Random", SeedDistribution = "Uniform")
+  PatchesDispersedMatrix <- FillTheMatix(Patches, LCV, MatrixHabs = MatrixHabs, PossibleNumberMatrixsPoints = NumberEachMatrixHabs, EqualSize = MatrixHabsEqualSize, ChosenPatchDistribution = MatrixPatchDistribution, SeedDistribution = MarixSeedDistribution)
 
   Patches = PatchesDispersedMatrix$Patches
   LCV = PatchesDispersedMatrix$InterestLCV
 
-  Patches = ScaleUpArray(Patches,4,4)
-  LCV = ScaleUpArray(LCV,4,4)
+  Scale <= FullExtent/GenExtent
+  if(!Scale==1){
+    Patches = ScaleUpArray(Patches,Scale,Scale)
+    LCV = ScaleUpArray(LCV,Scale,Scale)
 
-  WithBuffer = AddBuffer(LCV, Patches, 10)
-  Patches = WithBuffer$OutPatchesmatrix
-  LCV = WithBuffer$OutLandcovermatrix
+  }
+
+
+  if (BufferFullExtent>0){
+    WithBuffer = AddBuffer(LCV, Patches, BufferFullExtent)
+    Patches = WithBuffer$OutPatchesmatrix
+    LCV = WithBuffer$OutLandcovermatrix
+
+  }
+
 
   #RasPatches = raster(Patches, xmn=0, xmx =1000, ymn=0, ymx=1000)
   #levelplot(RasPatches , col.regions = rev(terrain.colors(255)), margin=FALSE, scales=list(x=axisLabels,y=axisLabels))
