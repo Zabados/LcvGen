@@ -17,15 +17,17 @@ GrowBuffer(yLocal, xLocal, seed, Extent, World, GrowWorld, WeightWorld)
 
 \item{World}{integer - width of window}
 
-\item{GrowWorld}{array}
+\item{GrowWorld}{array that defines where the patches of habitat are.}
 
-\item{WeightWorld}{array}
+\item{WeightWorld}{array of a weighted buffer around the patches used to grow patches.}
 }
 \value{
 list of arrays - the list contains two arrays, the updated GrowWorld and WeightWorld.
 }
 \description{
-I wrote this and I've lost track of exactly what it does...
+This takes two input arrays, one with the filled patches and the other with the buffered patches
+and converts one of the buffer cells into a cell of habitat and expands the buffer.I think
+it weights the buffer so that it often fills holes first.
 }
 \examples{
 

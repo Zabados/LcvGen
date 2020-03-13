@@ -28,10 +28,16 @@ and defaults to random.}
 \item{paretoVal}{defulat = 1}
 }
 \value{
-list of arrays - the list contains two arrays, the updated GrowWorld and WeightWorld.
+list of arrays - the list contains two or three arrays, the updated LargerWorld and an option SmallerWorld and GrowWorld.
+The first two are complete sets of patches, and can be of two different areas total.
 }
 \description{
-creates a landscape with zeros in and then adds patches
+creates a landscape with zeros in and then adds the number of patches. The result is
+an array with a zero background and complete numbered patches.
+}
+\details{
+It can actually return two complete numbered set of patches. The patches are the same, one just grown further along to give a larger area.
+Lastly it returns the buffer, that looks like an atol.
 }
 \examples{
 

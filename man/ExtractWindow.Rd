@@ -18,7 +18,8 @@ ExtractWindow(InMatrix, y, x, ySize = 3, xSize = 3)
 \item{xSize}{integer - width of window}
 }
 \value{
-array - a array smaller than the input array of the 3 by 3 by default or larger if specified.
+array - an array smaller than the input array. Of the 3 by 3 by default or larger if
+specified.
 }
 \description{
 This extracts a number of cells from an array. Typically used in a moving window for example.

@@ -10,24 +10,29 @@ This package allows for presicie control of generation of focal habitats
 as well as filling in the matrix habitats inbetween the focal patches.
 }
 \details{
-The main function i is \link[PhiCor]{CorIndex.all.plusP}.
-    This will calculate all phi corelation of association values and
-    purmutate to give p-values.
+The main function i are \link[LcvGen]{GenerateLandcover} and pottentially
+    \link[LcvGen]{CreateWorld} and \link[LcvGen]{FillTheMatix}.
+    This will generate a land cover and patches ascii datasets.
 
-    The other Phi coefficent functions are useful in testing or calculating only part
-    of the full outputs from \link[PhiCor]{CorIndex.all.plusP}:
+    Many of the other LCVGen functions are used in \link[LcvGen]{GenerateLandcover}.
+    Some of them may be useful alone however:
     \itemize{
-        \item \link[PhiCor]{CorIndex} calculates the inputs that don't change between habitats.
-        \item \link[PhiCor]{CorIndex.TargetVar} calculates the additional input specific to a habitat.
-        \item \link[PhiCor]{CorIndex.groupEqual} calculates the group-equalised phi for a habitat.
-        \item \link[PhiCor]{CorIndex.nonEqual} calculates the non group-equalised phi for a habitat.
-        \item \link[PhiCor]{CorIndex.xPerm} returns the null phi distribution for a habitat.
-        \item \link[PhiCor]{CorIndex.all} returns the non and group-equalised phi values for all habitats
-            without p-values and is therefore quicker.
+        \item \link[LcvGen]{CreateWorld} -
+        \item \link[LcvGen]{CreatSeeds} -
+        \item \link[LcvGen]{AddAllSeedPoints} -
+        \item \link[LcvGen]{ExtractWindow} -
+        \item \link[LcvGen]{GrowBuffer} -
+        \item \link[LcvGen]{CreateAdditionalWorld} -
+        \item \link[LcvGen]{AddMoreSeedPoints}
+        \item \link[LcvGen]{GrowAllBuffer}
+        \item \link[LcvGen]{FillAllZeroPatches}
+        \item \link[LcvGen]{ScaleUpArray}
+        \item \link[LcvGen]{AddBuffer}
+        \item \link[LcvGen]{ArrayToAsc}
     }
 
 
-    The functions \link[PhiCor]{lookup} and \link[PhiCor]{FilePathInTree}
+    The functions ? and ?
     might be used elsewhere.
 }
 \references{
