@@ -945,19 +945,43 @@ AddBuffer = function(landcovermatrix, patchesmatrix, buffer=5){
 #' @param PatchPath character - string of the output path of the patch ascii
 #' @param runno integer - defaults to NULL
 #' @param MatrixHabs integer -number of habitats in the matrix
-#' @param GenExtent integer - default 250, this is the extent that the land cover is generated at.
-#' @param SeedDistribution character -a distribution from which to pick the size of patches from. Opetions are
+#' @param GenExtent integer - default 250, this is the extent that the land cover is generated at. Can be slow with large values.
+#' @param FullExtent integer final extent of the landcover
+#' @param BufferFullExtent integer - buffer around the edge of the land cover
+#' @param cover floating point between 0 and 1.
+#' @param DistributionPatches character - how seed points are distributed to grow the patches. Options are "Random" or "Poisson", "Clustered" or "Thomas", or "Regular", "Strauss" or"Dispersed"
+#' and defaults to random.
+#' @param DistributionSeeds character - a distribution from which to pick the size of patches from. Opetions are
 #' "Gaussian" or"Normal", "Pareto", or the default "Uniform". Uniform gives patches of almost any size and the maximum variation.
+#' @param NumberEachMatrixHabs list of numbers - default is 1:200
+#' @param MatrixHabsEqualSize boolean - true or false
+#' @param MatrixPatchDistribution character - how seed points are distributed to grow the patches. Options are "Random" or "Poisson", "Clustered" or "Thomas", or "Regular", "Strauss" or"Dispersed"
+#' and defaults to random.
+#' @param MarixSeedDistribution character - a distribution from which to pick the size of patches from. Opetions are
+#' "Gaussian" or"Normal", "Pareto", or the default "Uniform". Uniform gives patches of almost any size and the maximum variation.
+#'
+#'
+#'
 #'
 #' @return list of arrays - the list contains two arrays, the "Patches" and "InterestLCV" (land cover).
 #' @examples
+#'    library(raster)
+#'    library(LcvGen)
 #'
-#' TBA...
+#'    NewLandcover <- GenerateLandcover(5, "Lcv5.asc", "Patches5.asc")
+#'    plot(raster(NewLandcover$LCV))
+#'    plot(raster(NewLandcover$Patches))
+#' @examples
 #'
 #' @export
-GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath, runno = NULL, MatrixHabs =10,
-                             GenExtent = 250, FullExtent = 1000, BufferFullExtent = 0,
-                             cover=0.1, DistributionPatches = "Random",
+GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath,
+                             runno = NULL,
+                             MatrixHabs =10,
+                             GenExtent = 250,
+                             FullExtent = 1000,
+                             BufferFullExtent = 0,
+                             cover=0.1,
+                             DistributionPatches = "Random",
                              DistributionSeeds = "Uniform",
                              NumberEachMatrixHabs = 1:200,
                              MatrixHabsEqualSize = FALSE,
