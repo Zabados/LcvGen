@@ -22,9 +22,28 @@ GenerateLandcover(NumberSeeds, LCVPath, PatchPath, runno = NULL,
 
 \item{MatrixHabs}{integer -number of habitats in the matrix}
 
-\item{GenExtent}{integer - default 250, this is the extent that the land cover is generated at.}
+\item{GenExtent}{integer - default 250, this is the extent that the land cover is generated at. Can be slow with large values.}
 
-\item{SeedDistribution}{character -a distribution from which to pick the size of patches from. Opetions are
+\item{FullExtent}{integer final extent of the landcover}
+
+\item{BufferFullExtent}{integer - buffer around the edge of the land cover}
+
+\item{cover}{floating point between 0 and 1.}
+
+\item{DistributionPatches}{character - how seed points are distributed to grow the patches. Options are "Random" or "Poisson", "Clustered" or "Thomas", or "Regular", "Strauss" or"Dispersed"
+and defaults to random.}
+
+\item{DistributionSeeds}{character - a distribution from which to pick the size of patches from. Opetions are
+"Gaussian" or"Normal", "Pareto", or the default "Uniform". Uniform gives patches of almost any size and the maximum variation.}
+
+\item{NumberEachMatrixHabs}{list of numbers - default is 1:200}
+
+\item{MatrixHabsEqualSize}{boolean - true or false}
+
+\item{MatrixPatchDistribution}{character - how seed points are distributed to grow the patches. Options are "Random" or "Poisson", "Clustered" or "Thomas", or "Regular", "Strauss" or"Dispersed"
+and defaults to random.}
+
+\item{MarixSeedDistribution}{character - a distribution from which to pick the size of patches from. Opetions are
 "Gaussian" or"Normal", "Pareto", or the default "Uniform". Uniform gives patches of almost any size and the maximum variation.}
 }
 \value{
@@ -35,7 +54,11 @@ This function uses other functions to create a land cover with the focal habitat
 of patches.
 }
 \examples{
+   library(raster)
+   library(LcvGen)
 
-TBA...
+   NewLandcover <- GenerateLandcover(5, "Lcv5.asc", "Patches5.asc")
+   plot(raster(NewLandcover$LCV))
+   plot(raster(NewLandcover$Patches))
 
 }
