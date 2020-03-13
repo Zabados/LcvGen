@@ -744,7 +744,7 @@ FillTheMatix <- function(Patches, InterestLCV, MatrixHabs = 10, PossibleNumberMa
   SizeEach = MatrixSize*Fract
   SizeEach = round(SizeEach)
   #print(SizeEach)
-  MatrixHabitats = sample(2:11,MatrixHabs,replace = FALSE)
+  MatrixHabitats = sample(2:(MatrixHabs+1),MatrixHabs,replace = FALSE)
 
   Extent<- nrow(Patches)
   StartingCounter = length(Patches[Patches>0])
@@ -972,6 +972,11 @@ AddBuffer = function(landcovermatrix, patchesmatrix, buffer=5){
 #'    plot(raster(NewLandcover$LCV))
 #'    plot(raster(NewLandcover$Patches))
 #' @examples
+#'
+#'    NewLandcover <- GenerateLandcover(4, "Lcv5.asc", "Patches5.asc",
+#'                                      DistributionPatches = "Dispersed",
+#'                                      NumberEachMatrixHabs = 4,
+#'                                      MatrixPatchDistribution = "Dispersed")
 #'
 #' @export
 GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath,
