@@ -189,6 +189,13 @@ GrowBuffer <- function(yLocal, xLocal, seed, Extent, World, GrowWorld, WeightWor
   #cdef vector[int] yRange
   yRange = miny:maxy
 
+
+  print(paste("Xlocal",xLocal))
+  print(paste("Ylocal",yLocal))
+  print(paste("maxx",maxx))
+  print(paste("maxy",maxy))
+  print(paste("Extent",Extent))
+
   for (xValue in xRange){
     for (yValue in yRange){
       if (xValue>0 && xValue<=Extent && yValue>0 && yValue<=Extent){
@@ -661,7 +668,7 @@ FillAllZeroPatches <-function(Patches){
     #This is basically a seed point. I should then be able to use the same growing code to fill it in.
     #Each one will then be reassesed.
     #Except it will need to be until length(GrowWorld) ==0 (or something like that.)
-    Extent <-250
+    #Extent <-250
     GrowWorld = matrix(0, nrow = Extent, ncol = Extent, byrow=TRUE)
     WeightWorld = matrix(0, nrow = Extent, ncol = Extent, byrow=TRUE)
 
