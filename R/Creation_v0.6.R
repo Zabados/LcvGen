@@ -189,13 +189,6 @@ GrowBuffer <- function(yLocal, xLocal, seed, Extent, World, GrowWorld, WeightWor
   #cdef vector[int] yRange
   yRange = miny:maxy
 
-
-  print(paste("Xlocal",xLocal))
-  print(paste("Ylocal",yLocal))
-  print(paste("maxx",maxx))
-  print(paste("maxy",maxy))
-  print(paste("Extent",Extent))
-
   for (xValue in xRange){
     for (yValue in yRange){
       if (xValue>0 && xValue<=Extent && yValue>0 && yValue<=Extent){
