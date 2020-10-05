@@ -5,7 +5,9 @@
 \alias{header}
 \title{header is the header for a asc file. This is a bit of a bodge, but can be added to
 an array to give and ascii file.}
-\format{Six character objects defining an ascii}
+\format{
+Six character objects defining an ascii
+}
 \usage{
 The data is automatically used and has no real independent use.
 }

@@ -4,12 +4,23 @@
 \alias{GenerateLandcover}
 \title{GenerateLandcover creates a ascii land cover dataset with a corresponding patch number data set.}
 \usage{
-GenerateLandcover(NumberSeeds, LCVPath, PatchPath, runno = NULL,
-  MatrixHabs = 10, GenExtent = 250, FullExtent = 1000,
-  BufferFullExtent = 0, cover = 0.1, DistributionPatches = "Random",
-  DistributionSeeds = "Uniform", NumberEachMatrixHabs = 1:200,
-  MatrixHabsEqualSize = FALSE, MatrixPatchDistribution = "Random",
-  MarixSeedDistribution = "Uniform")
+GenerateLandcover(
+  NumberSeeds,
+  LCVPath,
+  PatchPath,
+  runno = NULL,
+  MatrixHabs = 10,
+  GenExtent = 250,
+  FullExtent = 1000,
+  BufferFullExtent = 0,
+  cover = 0.1,
+  DistributionPatches = "Random",
+  DistributionSeeds = "Uniform",
+  NumberEachMatrixHabs = 1:200,
+  MatrixHabsEqualSize = FALSE,
+  MatrixPatchDistribution = "Random",
+  MarixSeedDistribution = "Uniform"
+)
 }
 \arguments{
 \item{NumberSeeds}{integer -}
@@ -60,5 +71,10 @@ of patches.
    NewLandcover <- GenerateLandcover(5, "Lcv5.asc", "Patches5.asc")
    plot(raster(NewLandcover$LCV))
    plot(raster(NewLandcover$Patches))
+
+   NewLandcover <- GenerateLandcover(4, "Lcv5.asc", "Patches5.asc",
+                                     DistributionPatches = "Dispersed",
+                                     NumberEachMatrixHabs = 4,
+                                     MatrixPatchDistribution = "Dispersed")
 
 }

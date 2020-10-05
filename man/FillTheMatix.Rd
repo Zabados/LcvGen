@@ -5,9 +5,15 @@
 \title{FillTheMatix adds habitats 2 to the number of MatrixHabs to the space between
 habitat patches.}
 \usage{
-FillTheMatix(Patches, InterestLCV, MatrixHabs = 10,
-  PossibleNumberMatrixsPoints = 1:200, EqualSize = FALSE,
-  ChosenPatchDistribution = "Random", SeedDistribution = "Uniform")
+FillTheMatix(
+  Patches,
+  InterestLCV,
+  MatrixHabs = 10,
+  PossibleNumberMatrixsPoints = 1:200,
+  EqualSize = FALSE,
+  ChosenPatchDistribution = "Random",
+  SeedDistribution = "Uniform"
+)
 }
 \arguments{
 \item{Patches}{array -}

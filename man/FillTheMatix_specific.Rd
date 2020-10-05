@@ -5,9 +5,15 @@
 \title{FillTheMatix_specific adds habitats of specified type to the space between
 habitat patches.}
 \usage{
-FillTheMatix_specific(Patches, InterestLCV, PossMatrixHabs = seq(2, 11),
-  PossibleNumberMatrixsPoints = 1:200, EqualSize = FALSE,
-  ChosenPatchDistribution = "Random", SeedDistribution = "Uniform")
+FillTheMatix_specific(
+  Patches,
+  InterestLCV,
+  PossMatrixHabs = seq(2, 11),
+  PossibleNumberMatrixsPoints = 1:200,
+  EqualSize = FALSE,
+  ChosenPatchDistribution = "Random",
+  SeedDistribution = "Uniform"
+)
 }
 \arguments{
 \item{Patches}{array -}
