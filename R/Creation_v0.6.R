@@ -714,7 +714,8 @@ FillTheMatrix <- function(Patches, InterestLCV, MatrixHabs = 10, PossibleNumberM
   }
   else if (length(PossibleNumberMatrixsPoints )==MatrixHabs){
     NumberOfEach = PossibleNumberMatrixsPoints
-  }else{
+  }
+  else{
     stop("PossibleNumberMatrixPoints not understood.")
   }
 
