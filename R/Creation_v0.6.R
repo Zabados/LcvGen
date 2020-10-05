@@ -709,8 +709,13 @@ FillTheMatrix <- function(Patches, InterestLCV, MatrixHabs = 10, PossibleNumberM
 
   if(length(PossibleNumberMatrixsPoints)==1){
     NumberOfEach = rep(PossibleNumberMatrixsPoints, MatrixHabs)
-  }else{
+  }else if(PossibleNumberMatrixsPoints == seq(min(PossibleNumberMatrixsPoints), max(PossibleNumberMatrixsPoints), length.out = length(PossibleNumberMatrixsPoints))){
     NumberOfEach = sample(PossibleNumberMatrixsPoints, MatrixHabs, replace = TRUE)
+  }
+  else if (length(PossibleNumberMatrixsPoints )==MatrixHabs){
+    NumberOfEach = PossibleNumberMatrixsPoints
+  }else{
+    stop("PossibleNumberMatrixPoints not understood.")
   }
 
   #print(NumberOfEach)
