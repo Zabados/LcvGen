@@ -6,7 +6,7 @@
 #'
 #' @details
 #'     The main function i are \link[LcvGen]{GenerateLandcover} and pottentially
-#'     \link[LcvGen]{CreateWorld} and \link[LcvGen]{FillTheMatix}.
+#'     \link[LcvGen]{CreateWorld} and \link[LcvGen]{FillTheMatrix}.
 #'     This will generate a land cover and patches ascii datasets.
 #'
 #'     Many of the other LCVGen functions are used in \link[LcvGen]{GenerateLandcover}.
@@ -685,7 +685,7 @@ FillAllZeroPatches <-function(Patches){
 
 
 
-#' FillTheMatix adds habitats 2 to the number of MatrixHabs to the space between
+#' FillTheMatrix adds habitats 2 to the number of MatrixHabs to the space between
 #' habitat patches.
 #'
 #' This function adds habitats into the intervening space between a focal habitat patch.
@@ -705,7 +705,7 @@ FillAllZeroPatches <-function(Patches){
 #' TBA...
 #'
 #' @export
-FillTheMatix <- function(Patches, InterestLCV, MatrixHabs = 10, PossibleNumberMatrixsPoints = 1:200, EqualSize =FALSE, ChosenPatchDistribution="Random",SeedDistribution = "Uniform" ){
+FillTheMatrix <- function(Patches, InterestLCV, MatrixHabs = 10, PossibleNumberMatrixsPoints = 1:200, EqualSize =FALSE, ChosenPatchDistribution="Random",SeedDistribution = "Uniform" ){
 
   if(length(PossibleNumberMatrixsPoints)==1){
     NumberOfEach = rep(PossibleNumberMatrixsPoints, MatrixHabs)
@@ -772,11 +772,11 @@ FillTheMatix <- function(Patches, InterestLCV, MatrixHabs = 10, PossibleNumberMa
   return(OutPut)
 }
 
-#' FillTheMatix_specific adds habitats of specified type to the space between
+#' FillTheMatrix_specific adds habitats of specified type to the space between
 #' habitat patches.
 #'
 #' This function adds habitats into the intervening space between a focal habitat patch.
-#' It differs from \link[LcvGen]{FillTheMatix} by allowing non sequential habitats. For example,
+#' It differs from \link[LcvGen]{FillTheMatrix} by allowing non sequential habitats. For example,
 #' habitat 2, 5, 7, 8, 9, 100.
 #'
 #' @param Patches array -
@@ -794,7 +794,7 @@ FillTheMatix <- function(Patches, InterestLCV, MatrixHabs = 10, PossibleNumberMa
 #' TBA...
 #'
 #' @export
-FillTheMatix_specific <- function(Patches, InterestLCV, PossMatrixHabs = seq(2,11), PossibleNumberMatrixsPoints = 1:200, EqualSize =FALSE, ChosenPatchDistribution="Random",SeedDistribution = "Uniform" ){
+FillTheMatrix_specific <- function(Patches, InterestLCV, PossMatrixHabs = seq(2,11), PossibleNumberMatrixsPoints = 1:200, EqualSize =FALSE, ChosenPatchDistribution="Random",SeedDistribution = "Uniform" ){
 
 
   MatrixHabs <- length(PossMatrixHabs)
@@ -890,7 +890,7 @@ ScaleUpArray <- function(InArray, scaleY, scaleX){
 #' habitat patches.
 #'
 #' This function adds habitats into the intervening space between a focal habitat patch.
-#' It differs from \link[LcvGen]{FillTheMatix} by allowing non sequential habitats. For example,
+#' It differs from \link[LcvGen]{FillTheMatrix} by allowing non sequential habitats. For example,
 #' habitat 2, 5, 7, 8, 9, 100.
 #'
 #' @param Patches array -
@@ -1019,7 +1019,7 @@ GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath,
   Patches = InterestPatches$LargerWorld
   LCV = ifelse(Patches>0,1,0)
 
-  PatchesDispersedMatrix <- FillTheMatix(Patches, LCV, MatrixHabs = MatrixHabs, PossibleNumberMatrixsPoints = NumberEachMatrixHabs, EqualSize = MatrixHabsEqualSize, ChosenPatchDistribution = MatrixPatchDistribution, SeedDistribution = MarixSeedDistribution)
+  PatchesDispersedMatrix <- FillTheMatrix(Patches, LCV, MatrixHabs = MatrixHabs, PossibleNumberMatrixsPoints = NumberEachMatrixHabs, EqualSize = MatrixHabsEqualSize, ChosenPatchDistribution = MatrixPatchDistribution, SeedDistribution = MarixSeedDistribution)
 
   Patches = PatchesDispersedMatrix$Patches
   LCV = PatchesDispersedMatrix$InterestLCV
