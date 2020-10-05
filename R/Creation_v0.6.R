@@ -294,10 +294,10 @@ CreatSeeds <- function(PatchDistribution, SeedPoints,Extent){
 #' @param SeedPoints integer - number of patches
 #' @param PercentageCover float between 0.0 & 1.0 giving the proportion of array that should be patches.
 #' @param Extent integer - size of square array, defaults to 250 (large arrays take longer to create.)
-#' @param SeedDistribution character - how seed points are distributed to grow the patches. Options are "Random" or "Poisson", "Clustered" or "Thomas", or "Regular", "Strauss" or"Dispersed"
-#' and defaults to random.
-#' @param PatchDistribution  character -a distribution from which to pick the size of patches from. Opetions are
+#' @param SeedDistribution character -a distribution from which to pick the size of patches from. Opetions are
 #' "Gaussian" or"Normal", "Pareto", or the default "Uniform". Uniform gives patches of almost any size and the maximum variation.
+#' @param PatchDistribution character - how seed points are distributed to grow the patches. Options are "Random" or "Poisson", "Clustered" or "Thomas", or "Regular", "Strauss" or"Dispersed"
+#' and defaults to random.
 #' @param SecondPercentageCover float between 0.0 & 1.0 giving the proportion of array that should be patches.If > 0 creates an additional array based on the seeds of the first with a different proportion.
 #' @param normalSD default = 0.01,
 #' @param paretoVal defulat = 1
