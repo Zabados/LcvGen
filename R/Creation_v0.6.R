@@ -997,7 +997,8 @@ GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath,
                              NumberEachMatrixHabs = 1:200,
                              MatrixHabsEqualSize = FALSE,
                              MatrixPatchDistribution = "Random",
-                             MarixSeedDistribution = "Uniform"){
+                             MarixSeedDistribution = "Uniform",
+                             normalSD = 0.1){
   #require(raster)
   #require(rasterVis)
   "
@@ -1020,7 +1021,7 @@ GenerateLandcover <-function(NumberSeeds, LCVPath, PatchPath,
 
   #axisLabels = list(at=c(0, 250, 500, 750,1000))
 
-  InterestPatches = CreateWorld(SeedPoints = NumberSeeds, PercentageCover = cover, Extent = GenExtent, SecondPercentageCover = 0 , PatchDistribution = DistributionPatches, SeedDistribution = DistributionSeeds )
+  InterestPatches = CreateWorld(SeedPoints = NumberSeeds, PercentageCover = cover, Extent = GenExtent, SecondPercentageCover = 0 , PatchDistribution = DistributionPatches, SeedDistribution = DistributionSeeds, normalSD = normalSD )
 
   Patches = InterestPatches$LargerWorld
   LCV = ifelse(Patches>0,1,0)
